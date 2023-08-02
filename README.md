@@ -38,4 +38,4 @@ Si deseas contribuir al proyecto, por favor, haz un fork del repositorio y crea 
 
 # preview
 
-![](https://i.imgur.com/oemZlmb.png)
+![](https://i.imgur.com/1WazeMw.png)
