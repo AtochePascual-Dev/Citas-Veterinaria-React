@@ -1,13 +1,22 @@
-const Paciente = () => {
-
+const Paciente = ({ paciente }) => {
+  const { nombre, propietario, email, fecha, sintoma } = paciente;
 
   return (
     <div className="mb-5 px-5 py-10 rounded-lg shadow-lg bg-white">
-      <p className="mb-1 font-bold uppercase text-gray-900">Nombre: <span className="font-normal normal-case">hook</span></p>
-      <p className="mb-1 font-bold uppercase text-gray-900">Propietario: <span className="font-normal normal-case">Jean</span></p>
-      <p className="mb-1 font-bold uppercase text-gray-900">Email: <span className="font-normal normal-case">correo@correo.com</span></p>
-      <p className="mb-1 font-bold uppercase text-gray-900">Fecha: <span className="font-normal normal-case">20-10-2023</span></p>
-      <p className="mb-1 font-bold uppercase text-gray-900">Sintomas: <span className="font-normal normal-case"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas natus aperiam mollitia, doloribus at eaque!</span></p>
+      <p className="mb-1 font-bold uppercase text-gray-900">Nombre: <span className="font-normal normal-case">{nombre}</span></p>
+      <p className="mb-1 font-bold uppercase text-gray-900">Propietario: <span className="font-normal normal-case">{propietario}</span></p>
+      <p className="mb-1 font-bold uppercase text-gray-900">Email: <span className="font-normal normal-case">{email}</span></p>
+      <p className="mb-1 font-bold uppercase text-gray-900">Fecha: <span className="font-normal normal-case">{fecha}</span></p>
+      <p className="mb-5 font-bold uppercase text-gray-900">Sintomas: <span className="font-normal normal-case"> {sintoma}</span></p>
+
+      <div className="flex justify-between">
+        <button className="px-10 py-3 font-bold uppercase rounded-md text-white bg-indigo-600 transition-colors duration-300 hover:bg-indigo-700">
+          Editar
+        </button>
+        <button className="px-10 py-3 font-bold uppercase rounded-md text-white bg-red-600 transition-colors duration-300 hover:bg-red-700">
+          Eliminar
+        </button>
+      </div>
     </div>
   )
 }
