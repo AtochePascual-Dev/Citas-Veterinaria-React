@@ -1,5 +1,11 @@
-const Paciente = ({ paciente, setPaciente }) => {
-  const { nombre, propietario, email, fecha, sintoma } = paciente;
+const Paciente = ({ paciente, setPaciente, pacientes, setPacientes }) => {
+  const { nombre, propietario, email, fecha, sintoma, id } = paciente;
+
+  const eliminarPaciente = () => {
+    const pacientesActualizados = pacientes.filter(pacienteState => pacienteState.id !== id);
+    setPacientes(pacientesActualizados)
+  };
+
 
   return (
     <div className="mb-5 px-5 py-10 rounded-lg shadow-lg bg-white">
@@ -15,7 +21,9 @@ const Paciente = ({ paciente, setPaciente }) => {
           onClick={() => setPaciente(paciente)}>
           Editar
         </button>
-        <button className="px-10 py-3 font-bold uppercase rounded-md text-white bg-red-600 transition-colors duration-300 hover:bg-red-700">
+        <button
+          className="px-10 py-3 font-bold uppercase rounded-md text-white bg-red-600 transition-colors duration-300 hover:bg-red-700"
+          onClick={eliminarPaciente}>
           Eliminar
         </button>
       </div>
