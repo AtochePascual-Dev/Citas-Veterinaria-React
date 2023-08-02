@@ -12,7 +12,7 @@ const ListadoPacientes = ({ pacientes, setPacientes, setPaciente }) => {
           : <p className="mb-10 font-bold text-center" >Empieza añadiento un <span className="text-indigo-600">paciente</span></p>
       }
 
-      <div className="md:h-screen md:overflow-y-scroll">
+      <div className="md:h-screen md:overflow-y-scroll scroll-modificado">
         {
           pacientes.map((paciente) =>
             <Paciente
