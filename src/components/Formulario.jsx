@@ -1,13 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Error from "./Error";
 
-const Formulario = ({ pacientes, setPacientes }) => {
+const Formulario = ({ pacientes, setPacientes, paciente, setPaciente }) => {
   const [nombre, setNombre] = useState('');
   const [propietario, setPropietario] = useState('');
   const [email, setEmail] = useState('');
   const [fecha, setFecha] = useState('');
   const [sintoma, setSintoma] = useState('');
   const [error, setError] = useState(false);
+  const [editar, setEditar] = useState(false);
+
+
+  useEffect(() => {
+    if (Object.keys(paciente).length) {
+      setNombre(paciente.nombre);
+      setPropietario(paciente.propietario);
+      setEmail(paciente.email);
+      setFecha(paciente.fecha);
+      setSintoma(paciente.sintoma);
+      setEditar(true);
+    }
+  }, [paciente]);
 
 
   const generarID = () => {
@@ -22,7 +35,6 @@ const Formulario = ({ pacientes, setPacientes }) => {
 
     // Validar formulario
     if ([nombre, propietario, email, fecha, sintoma].includes('')) {
-      console.log('Todos los campos son obligatorios');
       setError(true);
       return;
     };
@@ -38,8 +50,18 @@ const Formulario = ({ pacientes, setPacientes }) => {
       id: generarID()
     }
 
-    // Agregar paciente
-    setPacientes([...pacientes, nuevoPaciente]);
+    if (editar) {
+      // Editar pciente
+      nuevoPaciente.id = paciente.id;
+      const pacientesActualizados = pacientes.map(pacienteState => pacienteState.id === nuevoPaciente.id ? nuevoPaciente : pacienteState);
+
+      setPacientes(pacientesActualizados);
+      setPaciente({})
+      setEditar(false)
+    } else {
+      // Agregar paciente
+      setPacientes([...pacientes, nuevoPaciente]);
+    }
 
     // Resetear formulario 
     setNombre('');
@@ -115,7 +137,7 @@ const Formulario = ({ pacientes, setPacientes }) => {
 
         <input
           type="submit"
-          value="agregar papciente"
+          value={editar ? "guardar cambios" : "agregar paciente"}
           className="w-full p-3 font-bold uppercase cursor-pointer transition-colors duration-300 text-white bg-indigo-600 hover:bg-indigo-700" />
       </form>
     </div>
