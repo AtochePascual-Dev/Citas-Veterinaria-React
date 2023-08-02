@@ -1,13 +1,21 @@
 import { useState } from "react";
 import Error from "./Error";
 
-const Formulario = () => {
+const Formulario = ({ pacientes, setPacientes }) => {
   const [nombre, setNombre] = useState('');
   const [propietario, setPropietario] = useState('');
   const [email, setEmail] = useState('');
   const [fecha, setFecha] = useState('');
   const [sintoma, setSintoma] = useState('');
   const [error, setError] = useState(false);
+
+
+  const generarID = () => {
+    const parte1 = Math.random().toString(36).substring(2);
+    const parte2 = Date.now().toString(36).substring(2);
+    return parte1 + parte2;
+  };
+
 
   const hanldeSubmit = (event) => {
     event.preventDefault();
@@ -20,6 +28,25 @@ const Formulario = () => {
     };
 
     setError(false);
+
+    const nuevoPaciente = {
+      nombre,
+      propietario,
+      email,
+      fecha,
+      sintoma,
+      id: generarID()
+    }
+
+    // Agregar paciente
+    setPacientes([...pacientes, nuevoPaciente]);
+
+    // Resetear formulario 
+    setNombre('');
+    setPropietario('');
+    setEmail('');
+    setFecha('');
+    setSintoma('');
   };
 
 
